@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Real Estate',
-    'version': '18.0.0.0.2',
+    'version': '18.0.0.0.3',
     'category': 'Sales',
     'summary': 'Real Estate Management Module - Training Example',
     'description': """
@@ -33,6 +33,7 @@ This module showcases:
         'views/property_tag_views.xml',
         'views/property_views.xml',
         'views/menus.xml',
+        'views/res_partner_views.xml',
     ],
     'demo': [],
     'installable': True,
