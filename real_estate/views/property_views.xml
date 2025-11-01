@@ -29,9 +29,9 @@
             <form string="Property">
                 <header>
                     <button name="action_sold" string="Sell" type="object" 
-                            class="oe_highlight" states="offer_accepted"/>
+                            class="oe_highlight" invisible="state != 'offer_accepted'"/>
                     <button name="action_cancel" string="Cancel" type="object" 
-                            states="new,offer_received" class="oe_link"/>
+                            invisible="state not in ['new', 'offer_received']" class="oe_link"/>
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
