@@ -53,7 +53,7 @@
             <search string="Search Property Types">
                 <field name="name"/>
                 <filter string="With Properties" name="filter_with_properties" 
-                        domain="[('property_count', '&gt;', 0)]"/>
+                        domain="[('property_ids', '!=', False)]"/>
             </search>
         </field>
     </record>
