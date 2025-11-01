@@ -5,10 +5,10 @@
         <field name="name">property.type.tree</field>
         <field name="model">property.type</field>
         <field name="arch" type="xml">
-            <tree string="Property Types">
+            <list string="Property Types">
                 <field name="name"/>
                 <field name="property_count" sum="Total Properties"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -31,12 +31,12 @@
                         <page string="Properties" name="properties">
                             <!-- One2many relationship (reverse of Many2one) -->
                             <field name="property_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="name"/>
                                     <field name="postcode"/>
                                     <field name="expected_price"/>
                                     <field name="state"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -62,7 +62,7 @@
     <record id="action_property_type_list" model="ir.actions.act_window">
         <field name="name">Property Types</field>
         <field name="res_model">property.type</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
