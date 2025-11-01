@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Real Estate',
-    'version': '1.0',
+    'version': '18.0.0.0.0.2',
     'category': 'Sales',
     'summary': 'Real Estate Management Module - Training Example',
     'description': """
