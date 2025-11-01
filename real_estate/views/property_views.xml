@@ -35,11 +35,6 @@
                     <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button class="oe_stat_button" type="object" icon="fa-money">
-                            <field name="offer_count" widget="statinfo" string="Offers"/>
-                        </button>
-                    </div>
                     <group>
                         <group>
                             <field name="name"/>
