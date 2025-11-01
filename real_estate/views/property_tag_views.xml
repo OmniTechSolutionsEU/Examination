@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Property Tag List View -->
+    <record id="view_property_tag_tree" model="ir.ui.view">
+        <field name="name">property.tag.tree</field>
+        <field name="model">property.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Property Tags" decoration-info="color == 1" 
+                  decoration-success="color == 2" decoration-warning="color == 3">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Property Tag Form View -->
+    <record id="view_property_tag_form" model="ir.ui.view">
+        <field name="name">property.tag.form</field>
+        <field name="model">property.tag</field>
+        <field name="arch" type="xml">
+            <form string="Property Tag">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Enter description..."/>
+                    </group>
+                    <notebook>
+                        <page string="Properties" name="properties">
+                            <!-- Many2many relationship demonstration -->
+                            <field name="property_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="postcode"/>
+                                    <field name="expected_price"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Property Tag Search View -->
+    <record id="view_property_tag_search" model="ir.ui.view">
+        <field name="name">property.tag.search</field>
+        <field name="model">property.tag</field>
+        <field name="arch" type="xml">
+            <search string="Search Property Tags">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Property Tag Action -->
+    <record id="action_property_tag_list" model="ir.actions.act_window">
+        <field name="name">Property Tags</field>
+        <field name="res_model">property.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first property tag!
+            </p>
+            <p>
+                Tags help you organize and filter properties (e.g., "Luxury", "Waterfront", "Renovated").
+                This demonstrates Many2many relationships.
+            </p>
+        </field>
+    </record>
+</odoo>
+

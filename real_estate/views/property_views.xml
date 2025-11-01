@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Property List View -->
+    <record id="view_property_tree" model="ir.ui.view">
+        <field name="name">real.estate.property.tree</field>
+        <field name="model">real.estate.property</field>
+        <field name="arch" type="xml">
+            <tree string="Properties">
+                <field name="name"/>
+                <field name="property_type_id"/>
+                <field name="postcode"/>
+                <field name="date_availability"/>
+                <field name="expected_price" sum="Total Expected Price"/>
+                <field name="best_offer"/>
+                <field name="state" widget="badge" 
+                       decoration-info="state == 'new'"
+                       decoration-warning="state == 'offer_received'"
+                       decoration-success="state == 'sold'"
+                       decoration-danger="state == 'canceled'"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Property Form View -->
+    <record id="view_property_form" model="ir.ui.view">
+        <field name="name">real.estate.property.form</field>
+        <field name="model">real.estate.property</field>
+        <field name="arch" type="xml">
+            <form string="Property">
+                <header>
+                    <button name="action_sold" string="Sell" type="object" 
+                            class="oe_highlight" states="offer_accepted"/>
+                    <button name="action_cancel" string="Cancel" type="object" 
+                            states="new,offer_received" class="oe_link"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,offer_received,offer_accepted,sold"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" icon="fa-money">
+                            <field name="offer_count" widget="statinfo" string="Offers"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="property_type_id" 
+                                   options="{'no_create': True, 'no_open': True}"/>
+                            <field name="postcode"/>
+                            <field name="date_availability"/>
+                        </group>
+                        <group>
+                            <field name="salesperson_id"/>
+                            <field name="buyer_id" readonly="1"/>
+                            <field name="state"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Enter property description..."/>
+                        </page>
+                        <page string="Details" name="details">
+                            <group>
+                                <group string="Expected Price">
+                                    <field name="expected_price"/>
+                                    <field name="selling_price"/>
+                                    <field name="best_offer"/>
+                                </group>
+                                <group string="Details">
+                                    <field name="bedrooms"/>
+                                    <field name="living_area"/>
+                                    <field name="facades"/>
+                                    <field name="garage"/>
+                                    <field name="total_area" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Garden" name="garden">
+                            <group>
+                                <field name="garden"/>
+                                <field name="garden_area" attrs="{'invisible': [('garden', '=', False)]}"/>
+                                <field name="garden_orientation" 
+                                       attrs="{'invisible': [('garden', '=', False)]}"/>
+                            </group>
+                        </page>
+                        <page string="Tags" name="tags">
+                            <group>
+                                <!-- Many2many field demonstration -->
+                                <field name="tag_ids" widget="many2many_tags" 
+                                       options="{'color_field': 'color'}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Property Search View -->
+    <record id="view_property_search" model="ir.ui.view">
+        <field name="name">real.estate.property.search</field>
+        <field name="model">real.estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Search Properties">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="property_type_id"/>
+                <field name="tag_ids"/>
+                <field name="state"/>
+                <filter string="New" name="filter_new" domain="[('state', '=', 'new')]"/>
+                <filter string="Sold" name="filter_sold" domain="[('state', '=', 'sold')]"/>
+                <filter string="Available" name="filter_available" 
+                        domain="[('date_availability', '&lt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter string="With Garden" name="filter_garden" domain="[('garden', '=', True)]"/>
+                <filter string="With Garage" name="filter_garage" domain="[('garage', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Property Type" name="group_type" 
+                            domain="[]" context="{'group_by': 'property_type_id'}"/>
+                    <filter string="State" name="group_state" 
+                            domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Salesperson" name="group_salesperson" 
+                            domain="[]" context="{'group_by': 'salesperson_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Property Action -->
+    <record id="action_property_list" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">real.estate.property</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first property!
+            </p>
+            <p>
+                This is the main property management interface.
+                Here you can create and manage all your real estate properties.
+            </p>
+        </field>
+    </record>
+</odoo>
+

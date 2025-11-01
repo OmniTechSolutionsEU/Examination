@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_real_estate_root"
+              name="Real Estate"
+              sequence="10"/>
+    
+    <!-- Property Menu -->
+    <menuitem id="menu_properties"
+              name="Properties"
+              parent="menu_real_estate_root"
+              action="action_property_list"
+              sequence="10"/>
+    
+    <!-- Configuration Menu -->
+    <menuitem id="menu_real_estate_config"
+              name="Configuration"
+              parent="menu_real_estate_root"
+              sequence="20"/>
+    
+    <!-- Property Types Menu -->
+    <menuitem id="menu_property_types"
+              name="Property Types"
+              parent="menu_real_estate_config"
+              action="action_property_type_list"
+              sequence="10"/>
+    
+    <!-- Property Tags Menu -->
+    <menuitem id="menu_property_tags"
+              name="Property Tags"
+              parent="menu_real_estate_config"
+              action="action_property_tag_list"
+              sequence="20"/>
+</odoo>
+
